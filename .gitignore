@@ -1,0 +1,5 @@
+springdb_data/
+
+build/
+.gradle/
+bin/
