@@ -6,5 +6,12 @@
     "**/.git": true,
     "**/.DS_Store": true,
     "**/build/": true
-  }
+  },
+  "java.configuration.runtimes": [
+    {
+        "name": "JavaSE-21",
+        "path": "C:\\dev\\java\\21.0.8-win32-x86_64",
+        "default": true
+    }
+  ]
 }

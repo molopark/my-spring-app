@@ -3,7 +3,7 @@ spring:
     virtual:
       enabled: true
   datasource:
-    url: jdbc:postgresql://db-service:5432/springdb
+    url: jdbc:postgresql://localhost:5432/springdb
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
