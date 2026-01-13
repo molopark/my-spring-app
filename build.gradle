@@ -14,6 +14,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -24,10 +25,21 @@ dependencies {
     // 테스트 환경에서도 Lombok 사용 시 추가
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // IDE 테스트 실행을 돕기 위해 아래 라인 추가
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+test {
+    useJUnitPlatform()
+    environment "JASYPT_ENCRYPTOR_PASSWORD", System.getenv("JASYPT_ENCRYPTOR_PASSWORD")
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }

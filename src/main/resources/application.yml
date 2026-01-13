@@ -1,11 +1,19 @@
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    # 시스템 환경 변수 JASYPT_ENCRYPTOR_PASSWORD 값을 사용함
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+    algorithm: "PBEWithMD5AndDES"
+    iv-generator-classname: "org.jasypt.iv.NoIvGenerator"
+
 spring:
   threads:
     virtual:
       enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/springdb
-    username: user
-    password: password
+    username: "ENC(nbn9aa8RF/fIxh0na85F6w==)"
+    password: "ENC(NRMX+X+DAYZVTTxiWYkDMPYaqMc1X0a0)"
     driver-class-name: org.postgresql.Driver
 
 mybatis:
@@ -13,3 +21,18 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true # snake_case -> camelCase 매핑
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  # 날짜 포맷 정의
+  pattern:
+    dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
+    # 콘솔 로그 출력 패턴 (색상 및 레이아웃)
+    console: "%clr(%d{${logging.pattern.dateformat}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  
+  # 특정 패키지의 로그 레벨 설정 (MyBatis 쿼리를 보려면 DEBUG)
+  level:
+    root: INFO
+    # com.example.demo: DEBUG # 본인의 패키지 경로로 수정
+    # org.mybatis: DEBUG
+    # org.springframework.jdbc: DEBUG
+
